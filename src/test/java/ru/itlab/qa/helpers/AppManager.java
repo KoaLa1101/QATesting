@@ -1,5 +1,6 @@
 package ru.itlab.qa.helpers;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -34,19 +35,20 @@ public class AppManager{
 //        return app.get();
 //    }
 
-    public AppManager() {
+    public AppManager(AccountData acc, Mail testData) {
+        WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
         js = (JavascriptExecutor) driver;
         webDriverWait = new WebDriverWait(driver, 20);
         //set acc
         accountData = new AccountData();
-        accountData.setUsername("akhmethanov@internet.ru");
-        accountData.setPassword("Sne)I(ok1101");
+        accountData.setUsername(acc.getUsername());
+        accountData.setPassword(acc.getPassword());
         //set mail
         mail = new Mail();
-        mail.setReceiver("rproba@list.ru");
-        mail.setTheme("test fail msg");
-        mail.setText("Hello world! by @koala1101");
+        mail.setReceiver(testData.getReceiver());
+        mail.setTheme(testData.getTheme());
+        mail.setText(testData.getText());
         //set helpers
         loginHelper = new LoginHelper(this, accountData);
         draftHelper = new DraftHelper(this, mail, webDriverWait);
