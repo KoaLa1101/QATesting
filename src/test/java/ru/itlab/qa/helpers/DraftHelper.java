@@ -20,7 +20,7 @@ public class DraftHelper extends HelperBase {
     }
 
     @SneakyThrows
-    public void createNewMail() {
+    public void createNewMail(Mail mail) {
         driver.get("https://e.mail.ru/inbox");
         Thread.sleep(5000);
         driver.findElement(By.cssSelector(".compose-button__txt")).click();
@@ -47,7 +47,7 @@ public class DraftHelper extends HelperBase {
         driver.findElement(By.cssSelector(".button2:nth-child(3) .button2__txt")).click();
     }
 
-    public boolean isExistDraft() {
+    public boolean isExistDraft(Mail mail) {
         driver.get("https://e.mail.ru/drafts/");
         int i = 1;
         while (i < 5) {

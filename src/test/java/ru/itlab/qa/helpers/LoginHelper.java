@@ -1,18 +1,19 @@
 package ru.itlab.qa.helpers;
 
 import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.springframework.util.Assert;
 import ru.itlab.qa.models.AccountData;
 
+@Slf4j
 public class LoginHelper extends HelperBase {
-    private AppManager manager;
     private AccountData accountData;
 
     public LoginHelper(AppManager manager, AccountData accountData) {
-        this.manager = manager;
         this.accountData = accountData;
         driver = manager.driver;
     }
@@ -37,6 +38,17 @@ public class LoginHelper extends HelperBase {
         }
         driver.findElement(By.cssSelector(".innerTextWrapper-0-2-90:nth-child(1)")).click();
         Thread.sleep(2000);
+        Assert.isTrue(isAuthed());
+        Thread.sleep(2000);
+    }
+
+    @SneakyThrows
+    private boolean isAuthed(){
+        Thread.sleep(3000);
+        By username = By.xpath("/html/body/div[3]/div[1]/div/div[2]/div[2]/span[2]");
+        log.info("USERNAME : " + driver.findElement(username).getText());
+        return driver.findElement(username).getText().equals(accountData.getUsername());
+
     }
 
 }

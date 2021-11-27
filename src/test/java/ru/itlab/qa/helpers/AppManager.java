@@ -35,7 +35,7 @@ public class AppManager{
 //        return app.get();
 //    }
 
-    public AppManager(AccountData acc, Mail testData) {
+    public AppManager(AccountData acc) {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
         js = (JavascriptExecutor) driver;
@@ -46,9 +46,9 @@ public class AppManager{
         accountData.setPassword(acc.getPassword());
         //set mail
         mail = new Mail();
-        mail.setReceiver(testData.getReceiver());
-        mail.setTheme(testData.getTheme());
-        mail.setText(testData.getText());
+//        mail.setReceiver(testData.getReceiver());
+//        mail.setTheme(testData.getTheme());
+//        mail.setText(testData.getText());
         //set helpers
         loginHelper = new LoginHelper(this, accountData);
         draftHelper = new DraftHelper(this, mail, webDriverWait);

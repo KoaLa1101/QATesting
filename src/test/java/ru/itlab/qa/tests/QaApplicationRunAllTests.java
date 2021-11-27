@@ -22,7 +22,6 @@ public class QaApplicationRunAllTests extends TestBase{
     @SneakyThrows
     @Test
     public void createDraft(){
-        Assert.assertFalse(checkIsExistDraft());
         createNewDraft();
     }
 
