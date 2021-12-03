@@ -12,6 +12,7 @@ import ru.itlab.qa.models.Mail;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class TestBase {
     private static AppManager manager;
@@ -23,19 +24,15 @@ public class TestBase {
     };
 
     static {
-        try {
-            manager = new AppManager(dataJsonUtil.readValues("accountData.json", accTypeReference).get(0));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        manager = new AppManager();
     }
 
     public static void tearDown() {
         manager.stop();
     }
 
-    public void login() {
-        manager.getLoginHelper().login();
+    public void login(int index) {
+        manager.getLoginHelper().login(getAcc(index));
     }
 
     @SneakyThrows
@@ -43,7 +40,7 @@ public class TestBase {
         List<Mail> list = mailJsonUtil.readValues("mail.json", mailTypeReference);
 //        List<Mail> mailList = new ArrayList<>();
 //        for (int i = 0; i < 5; i++) {
-//            mailList.add(Mail.builder().receiver(mailJsonUtil.generateString(5)).theme(mailJsonUtil.generateString(5)).text(mailJsonUtil.generateString(20)).build());
+//            mailList.add(Mail.builder().receiver(mailJsonUtil.generateString(5) + "@" + mailJsonUtil.generateString(4)).theme(mailJsonUtil.generateString(5)).text(mailJsonUtil.generateString(20)).build());
 //        }
 //        mailList.addAll(list);
 //        mailJsonUtil.writeValues(mailList, "mail.json");
@@ -61,6 +58,16 @@ public class TestBase {
 
     public boolean checkIsExistDraft(Mail mail) {
         return manager.getDraftHelper().isExistDraft(mail);
+    }
+
+
+    @SneakyThrows
+    private static AccountData getAcc(int index){
+        return dataJsonUtil.readValues("accountData.json", accTypeReference).get(index);
+    }
+
+    public boolean isAuthed(int index){
+        return manager.getLoginHelper().isAuthed(getAcc(index));
     }
 
 

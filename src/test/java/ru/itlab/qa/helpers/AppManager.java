@@ -35,22 +35,22 @@ public class AppManager{
 //        return app.get();
 //    }
 
-    public AppManager(AccountData acc) {
+    public AppManager() {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
         js = (JavascriptExecutor) driver;
         webDriverWait = new WebDriverWait(driver, 20);
         //set acc
         accountData = new AccountData();
-        accountData.setUsername(acc.getUsername());
-        accountData.setPassword(acc.getPassword());
+//        accountData.setUsername(acc.getUsername());
+//        accountData.setPassword(acc.getPassword());
         //set mail
         mail = new Mail();
 //        mail.setReceiver(testData.getReceiver());
 //        mail.setTheme(testData.getTheme());
 //        mail.setText(testData.getText());
         //set helpers
-        loginHelper = new LoginHelper(this, accountData);
+        loginHelper = new LoginHelper(this);
         draftHelper = new DraftHelper(this, mail, webDriverWait);
         navigationHelper = new NavigationHelper(this);
         deleteHelper = new DeleteHelper(this);

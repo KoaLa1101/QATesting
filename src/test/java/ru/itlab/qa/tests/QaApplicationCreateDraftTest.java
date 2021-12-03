@@ -5,7 +5,7 @@ import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-public class QaApplicationCreateDraftTest extends TestBase {
+public class QaApplicationCreateDraftTest extends AuthBase {
 
     @SneakyThrows
     @Test

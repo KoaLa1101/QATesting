@@ -16,7 +16,14 @@ public class QaApplicationRunAllTests extends TestBase{
     @SneakyThrows
     @Test
     public void auth(){
-        login();
+        login(0);
+    }
+
+    @SneakyThrows
+    @Test
+    public void aauthFail(){
+        login(1);
+        Assert.assertFalse(isAuthed(1));
     }
 
     @SneakyThrows

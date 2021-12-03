@@ -15,7 +15,7 @@ public class QaApplicationLoginTest extends TestBase {
     @SneakyThrows
     @Test
     public void testLogin() {
-        login();
+        login(0);
     }
 
 
